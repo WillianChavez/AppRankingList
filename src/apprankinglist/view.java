@@ -5,7 +5,9 @@
 package apprankinglist;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -55,6 +57,11 @@ public class view extends javax.swing.JFrame {
     public void alternarEstadoDeBotones(boolean inicial){
         btnIniciar.setEnabled(inicial);
         btnVerRanking.setEnabled(!inicial);
+    }
+    
+    public void ordenarRanking(){
+        
+        jugadores.sort(Comparator.comparing(Jugador::getPuntaje).reversed());
     }
     
    /**
@@ -139,9 +146,12 @@ public class view extends javax.swing.JFrame {
     private void btnVerRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRankingActionPerformed
         // TODO add your handling code here:
         // mostrando lista de jugadores por consola
-        for(Jugador j:jugadores){
-            System.out.println(j);
-        }
+        ordenarRanking();
+        ViewRanking newFrame = new ViewRanking(jugadores,jugador);
+        
+        newFrame.setVisible(true);
+        alternarEstadoDeBotones(true);
+        this.dispose();
     }//GEN-LAST:event_btnVerRankingActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -157,6 +167,7 @@ public class view extends javax.swing.JFrame {
             rellenarLista();
             int puntajeAleatorio = rnd.nextInt(2000 - 1000 + 1) + 1000; // puntaje aleatorio entre 2000 y 1000
             jugador = new Jugador(nombre, puntajeAleatorio);
+            
             jugadores.add(jugador); // Agregamos el jugador a la lista
             alternarEstadoDeBotones(false);
             
