@@ -28,15 +28,16 @@ public class ViewRanking extends javax.swing.JFrame {
         rellenarTabla();
         int posicion = 0;
         for(int i = 0; i<model.getRowCount();i++){
-            System.out.println(model.getValueAt(i, 0));
+           
             if(player.getNombre() == model.getValueAt(i, 1)){
                 posicion = (int) model.getValueAt(i, 0);
             }
         }
         txtPosicion.setText("Felicidades " + jugador.getNombre() + "\n quedaste en " + posicion +"º con " + jugador.getPuntaje()+" Puntos" );
         
-        this.setLocationRelativeTo(this);
-        rsscalelabel.RSScaleLabel.setScaleLabel(background, "src/images/background.jpg");
+  
+      
+       
     }
 
     private ViewRanking() {
@@ -126,6 +127,8 @@ public class ViewRanking extends javax.swing.JFrame {
         txtPosicion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtPosicion.setText("txtPosicion");
         jPanel1.add(txtPosicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 370, 450, -1));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background2.jpg"))); // NOI18N
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

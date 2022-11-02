@@ -4,9 +4,12 @@
  */
 package apprankinglist;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -22,12 +25,14 @@ public class view extends javax.swing.JFrame {
     private Jugador jugador = null; // jugador principal
     private ArrayList<Jugador> jugadores= new ArrayList<>();  // lista de jugadores
     private Random rnd = new Random();
-   
+    
 
     public view() {
+       
         initComponents();
-        this.setLocationRelativeTo(this);
-        rsscalelabel.RSScaleLabel.setScaleLabel(background, "src/images/background.jpg");
+        
+        
+        
     }
 
     // Rellenamos la lista con datos falsos
@@ -122,6 +127,7 @@ public class view extends javax.swing.JFrame {
         });
         jPanel1.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, 40));
 
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/background.jpg"))); // NOI18N
         background.setOpaque(true);
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 380));
 
@@ -143,17 +149,6 @@ public class view extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRankingActionPerformed
-        // TODO add your handling code here:
-        // mostrando lista de jugadores por consola
-        ordenarRanking();
-        ViewRanking newFrame = new ViewRanking(jugadores,jugador);
-        
-        newFrame.setVisible(true);
-        alternarEstadoDeBotones(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVerRankingActionPerformed
-
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
         String nombre = txtNombre.getText();
@@ -167,12 +162,23 @@ public class view extends javax.swing.JFrame {
             rellenarLista();
             int puntajeAleatorio = rnd.nextInt(2000 - 1000 + 1) + 1000; // puntaje aleatorio entre 2000 y 1000
             jugador = new Jugador(nombre, puntajeAleatorio);
-            
+
             jugadores.add(jugador); // Agregamos el jugador a la lista
             alternarEstadoDeBotones(false);
-            
+
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnVerRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRankingActionPerformed
+        // TODO add your handling code here:
+        // mostrando lista de jugadores por consola
+        ordenarRanking();
+        ViewRanking newFrame = new ViewRanking(jugadores,jugador);
+
+        newFrame.setVisible(true);
+        alternarEstadoDeBotones(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVerRankingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,4 +224,6 @@ public class view extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+    
+
 }
